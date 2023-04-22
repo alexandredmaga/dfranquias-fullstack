@@ -8,11 +8,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class GadoController extends AbstractController
 {
-    #[Route('/gado', name: 'app_gado')]
+    #[Route('/gado', name: 'gado')]
     public function index(): Response
     {
-        return $this->render('gado/index.html.twig', [
-            'controller_name' => 'GadoController',
-        ]);
+
+        $data['titulo'] = 'Gerenciar bovinos';
+
+        return $this->render('gado/index.html.twig', $data);
     }
 }
