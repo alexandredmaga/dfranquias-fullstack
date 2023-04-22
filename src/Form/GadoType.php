@@ -36,7 +36,7 @@ class GadoType extends AbstractType
 				'html5' => false,
 				'format' => 'dd/MM/yyyy',
                 'widget' => 'single_text',
-                'attr' => ['placeholder' => 'dia/mes/ano']
+                'attr' => ['class' => 'js-datepicker', 'placeholder' => 'dia/mes/ano']
 			])
 			->add('Salvar', SubmitType::class);
 	}
