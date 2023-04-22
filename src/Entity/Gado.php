@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\GadoRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: GadoRepository::class)]
@@ -27,6 +28,9 @@ class Gado
 
     #[ORM\Column]
     private ?bool $estado = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $nascimento = null;
 
     public function getId(): ?int
     {
@@ -89,6 +93,18 @@ class Gado
     public function setEstado(bool $estado): self
     {
         $this->estado = $estado;
+
+        return $this;
+    }
+
+    public function getNascimento(): ?\DateTimeInterface
+    {
+        return $this->nascimento;
+    }
+
+    public function setNascimento(\DateTimeInterface $nascimento): self
+    {
+        $this->nascimento = $nascimento;
 
         return $this;
     }
