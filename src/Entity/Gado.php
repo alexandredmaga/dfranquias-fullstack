@@ -108,4 +108,9 @@ class Gado
 
         return $this;
     }
+
+    public function __construct() 
+    {
+        $this->estado = true;
+    }
 }
