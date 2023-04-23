@@ -3,6 +3,7 @@
 {% block title %}{% endblock %}
 
 {% block body %}
+<div class="container">
     <h1>{{ titulo }}</h1>
     <a href="{{path('gado_adicionar')}}" class="btn btn-primary">+ Adicionar novo gado</a>
     <table class="table">
@@ -36,5 +37,6 @@
         {% endfor %}      
         </tbody>
     </table>
+</div>
               
 {% endblock %}

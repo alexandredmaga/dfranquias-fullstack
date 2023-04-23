@@ -13,8 +13,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class GadoController extends AbstractController
 {
-    #[Route('/gado', name: 'gado')]
+
+    #[Route('/', name: 'home')]
     public function index(GadoRepository $gadoRepository): Response
+    {
+        return $this->render('home.html.twig', ['titulo' => 'home']);
+    }
+
+    #[Route('/gado', name: 'gado')]
+    public function listar(GadoRepository $gadoRepository): Response
     {
 
         $gados = $gadoRepository->findAll();
@@ -75,5 +82,18 @@ class GadoController extends AbstractController
 
         return $this->redirectToRoute('gado');
     }
+
+    #[Route('/gado/abate}', name: 'gado_abate')]
+    public function abate(GadoRepository $gadoRepository, Request $request): Response
+    {
+        return $this->render('gado/abate.html.twig', ['titulo' => 'abate']);
+    }
+
+    #[Route('/gado/abatidos}', name: 'gado_abatidos')]
+    public function abatidos(GadoRepository $gadoRepository, Request $request): Response
+    {
+        return $this->render('gado/abatidos.html.twig', ['titulo' => 'abatidos']);
+    }
+
 
 }
