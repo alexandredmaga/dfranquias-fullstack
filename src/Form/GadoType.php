@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class GadoType extends AbstractType
 {
@@ -36,7 +37,13 @@ class GadoType extends AbstractType
 				'html5' => false,
 				'format' => 'dd/MM/yyyy',
                 'widget' => 'single_text',
-                'attr' => ['class' => 'js-datepicker', 'placeholder' => 'dia/mes/ano']
+                'attr' => ['class' => 'js-datepicker', 'placeholder' => 'dia/mes/ano'],
+                'constraints' => [
+                	new Assert\LessThanOrEqual([
+                		'value' => 'today',
+                		'message' => 'A data não pode ser futura'
+                	])
+                ]
 			])
 			->add('Salvar', SubmitType::class);
 	}
