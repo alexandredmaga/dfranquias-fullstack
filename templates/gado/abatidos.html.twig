@@ -1,6 +1,35 @@
 {% extends 'base.html.twig' %}
 {% block title %}DFazendas - Gados abatidos {% endblock %}
 {% block body %} 
-{{ titulo }}
+<div class="container">
+    <h1>{{ titulo }}</h1>
+    <table class="table">
+       <thead>
+           <tr>
+               <th scope="col">#</th>
+               <th scope="col">Código</th>
+               <th scope="col">Leite Produzido</th>
+               <th scope="col">Ração</th>
+               <th scope="col">Peso</th>
+               <th scope="col">Estado</th>
+               <th scope="col">Data de nascimento</th>
+               <th scope="col">Ações</th>
+           </tr>
+       </thead>
+       <tbody>
+       {% for gado in gados %}
+            <tr>
+                <td>{{gado.id}}</td>
+                <td>{{gado.codigo}}</td>
+                <td>{{gado.leite}} Litros</td>
+                <td>{{gado.racao}} Kg</td>
+                <td>{{gado.peso}} Kg</td>
+                <td>{{gado.estado }}</td>
+                <td>{{gado.nascimento|date("d/m/Y")}}</td>
+            </tr>
+        {% endfor %}      
+        </tbody>
+    </table>
+</div>
 
 {% endblock %}

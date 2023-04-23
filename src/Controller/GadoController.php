@@ -84,15 +84,21 @@ class GadoController extends AbstractController
     }
 
     #[Route('/gado/abate}', name: 'gado_abate')]
-    public function abate(GadoRepository $gadoRepository, Request $request): Response
+    public function abate(GadoRepository $gadoRepository): Response
     {
-        return $this->render('gado/abate.html.twig', ['titulo' => 'abate']);
+        $data['gados'] = $gadoRepository->findPossibiliadeDeAbate();
+        $data['titulo'] = 'Gados prontos para abate';
+        
+        return $this->render('gado/abate.html.twig', $data);
     }
 
     #[Route('/gado/abatidos}', name: 'gado_abatidos')]
-    public function abatidos(GadoRepository $gadoRepository, Request $request): Response
+    public function abatidos(GadoRepository $gadoRepository): Response
     {
-        return $this->render('gado/abatidos.html.twig', ['titulo' => 'abatidos']);
+        $data['gados'] = $gadoRepository->findByEstado(false);
+        $data['titulo'] = 'Bovinos abatidos';
+        
+        return $this->render('gado/abatidos.html.twig', $data);
     }
 
 
