@@ -13,8 +13,7 @@
                <th scope="col">Peso</th>
                <th scope="col">Estado</th>
                <th scope="col">Data de nascimento</th>
-               <th scope="col">Ações</th>
-           </tr>
+            </tr>
        </thead>
        <tbody>
        {% for gado in gados %}
@@ -24,7 +23,9 @@
                 <td>{{gado.leite}} Litros</td>
                 <td>{{gado.racao}} Kg</td>
                 <td>{{gado.peso}} Kg</td>
-                <td>{{gado.estado }}</td>
+                {%  if gado.estado != 1 %}
+                <td>Abatido</td>
+                {% endif %}
                 <td>{{gado.nascimento|date("d/m/Y")}}</td>
             </tr>
         {% endfor %}      

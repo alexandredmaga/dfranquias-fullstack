@@ -27,8 +27,7 @@
                 <td>{{gado.estado }}</td>
                 <td>{{gado.nascimento|date("d/m/Y")}}</td>
                 <td>
-                    <a href="{{path('gado_editar', {id: gado.id})}}" class="btn btn-primary">Editar</a>
-                    <a href="{{path('gado_excluir', {id: gado.id})}}"  class="btn btn-primary">Excluir</a>
+                    <a href="{{path('gado_abater', {id: gado.id})}}" class="btn btn-primary">Abater</a>
                 </td>
             </tr>
         {% endfor %}      

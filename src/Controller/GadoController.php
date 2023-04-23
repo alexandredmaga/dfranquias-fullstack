@@ -83,7 +83,7 @@ class GadoController extends AbstractController
         return $this->redirectToRoute('gado');
     }
 
-    #[Route('/gado/abate}', name: 'gado_abate')]
+    #[Route('/gado/abate', name: 'gado_abate')]
     public function abate(GadoRepository $gadoRepository): Response
     {
         $data['gados'] = $gadoRepository->findPossibiliadeDeAbate();
@@ -92,7 +92,20 @@ class GadoController extends AbstractController
         return $this->render('gado/abate.html.twig', $data);
     }
 
-    #[Route('/gado/abatidos}', name: 'gado_abatidos')]
+    #[Route('/gado/abater/{id}', name: 'gado_abater')]
+    public function abater($id, EntityManagerInterface $em, GadoRepository $gadoRepository): Response
+    {
+        $gado = $gadoRepository->find($id);  
+        $gado->setEstado(false);
+
+        $em->persist($gado);
+        $em->flush(); 
+
+        return $this->redirectToRoute('gado');
+    }
+
+
+    #[Route('/gado/abatidos', name: 'gado_abatidos')]
     public function abatidos(GadoRepository $gadoRepository): Response
     {
         $data['gados'] = $gadoRepository->findByEstado(false);
