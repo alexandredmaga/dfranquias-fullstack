@@ -39,20 +39,28 @@ class GadoRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Gado[] Returns an array of Gado objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('g')
-//            ->andWhere('g.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('g.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findPossibiliadeDeAbate() 
+    {
+
+        return $this->createQueryBuilder('g')
+            ->where('g.estado = true')
+            ->andWhere('g.leite < 40 or g.nascimento < :data or (g.peso/15) > 18 or (g.leite < 70 and g.racao > (50/7))')
+            ->setParameter('data', date('Y-m-d', strtotime('-5 year')))
+            ->orderBy('g.id')
+            ->getQuery()
+            ->getResult();
+    }
+
+
+    public function findByEstado($value): array
+    {
+       return $this->createQueryBuilder('g')
+            ->andWhere('g.estado = :val')
+            ->setParameter('val', $value)
+            ->orderBy('g.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 
 //    public function findOneBySomeField($value): ?Gado
 //    {
