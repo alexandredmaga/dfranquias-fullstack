@@ -81,6 +81,18 @@ class GadoRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 
+    public function findCaracteristicasDoGado()
+    {
+        return $this->createQueryBuilder('g')
+            ->where('g.nascimento >= :data and g.racao > 500')
+            ->andWhere('g.estado = :estado')
+            ->select('COUNT(g.id)')
+            ->setParameter('estado', true)
+            ->setParameter('data', date('Y-m-d', strtotime('-5 year')))
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
 //    public function findOneBySomeField($value): ?Gado
 //    {
 //        return $this->createQueryBuilder('g')
