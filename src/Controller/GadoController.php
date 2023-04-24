@@ -17,7 +17,11 @@ class GadoController extends AbstractController
     #[Route('/', name: 'home')]
     public function index(GadoRepository $gadoRepository): Response
     {
-        return $this->render('home.html.twig', ['titulo' => 'home']);
+
+        $data['titulo'] = 'home';
+        $data['leite'] = $gadoRepository->findTotalDeLeiteProduzido();
+
+        return $this->render('home.html.twig', $data);
     }
 
     #[Route('/gado', name: 'gado')]

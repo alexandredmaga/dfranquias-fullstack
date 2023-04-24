@@ -41,7 +41,6 @@ class GadoRepository extends ServiceEntityRepository
 
     public function findPossibiliadeDeAbate() 
     {
-
         return $this->createQueryBuilder('g')
             ->where('g.estado = true')
             ->andWhere('g.leite < 40 or g.nascimento < :data or (g.peso/15) > 18 or (g.leite < 70 and g.racao > (50/7))')
@@ -60,6 +59,15 @@ class GadoRepository extends ServiceEntityRepository
             ->orderBy('g.id', 'ASC')
             ->getQuery()
             ->getResult();
+    }
+
+    public function findTotalDeLeiteProduzido() {
+        return $this->createQueryBuilder('g')
+            ->where('g.estado = :estado')
+            ->select('SUM(g.leite)')
+            ->setParameter('estado', true)
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 
 //    public function findOneBySomeField($value): ?Gado
