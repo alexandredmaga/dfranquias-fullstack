@@ -61,10 +61,21 @@ class GadoRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findTotalDeLeiteProduzido() {
+    public function findTotalDeLeiteProduzido() 
+    {
         return $this->createQueryBuilder('g')
             ->where('g.estado = :estado')
             ->select('SUM(g.leite)')
+            ->setParameter('estado', true)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function findRacaoNecessaria() 
+    {
+        return $this->createQueryBuilder('g')
+            ->where('g.estado = :estado')
+            ->select('SUM(g.racao)')
             ->setParameter('estado', true)
             ->getQuery()
             ->getSingleScalarResult();

@@ -20,6 +20,7 @@ class GadoController extends AbstractController
 
         $data['titulo'] = 'home';
         $data['leite'] = $gadoRepository->findTotalDeLeiteProduzido();
+        $data['racao'] = $gadoRepository->findRacaoNecessaria();
 
         return $this->render('home.html.twig', $data);
     }
