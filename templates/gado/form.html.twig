@@ -6,6 +6,21 @@
 
 <div class="container"> 
    <h1>{{titulo}}</h1>
+   {% if app.session.flashBag.has('success') %}
+    <div class="alert alert-success">
+        {% for message in app.session.flashBag.get('success') %}
+            {{ message }}
+        {% endfor %}
+    </div>
+   {% endif %}
+
+   {% if app.session.flashBag.has('error') %}
+    <div class="alert alert-danger">
+        {% for message in app.session.flashBag.get('error') %}
+            {{ message }}
+        {% endfor %}
+    </div>
+   {% endif %}
    {{ form(form) }}
 </div>
 

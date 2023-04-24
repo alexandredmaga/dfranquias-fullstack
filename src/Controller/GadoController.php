@@ -48,9 +48,21 @@ class GadoController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
+            
+            $codigo = $gado->getCodigo();
+            $existeCodigo = $em->getRepository(Gado::class)->findOneBy([
+                'codigo' => $codigo,
+                'estado' => true
+            ]);
+
+            if($existeCodigo) {
+                $this->addFlash('error', 'Erro ao adicionar, o código fornecido já existe!');
+                return $this->redirectToRoute('gado_adicionar');
+            }
             //adicionar novo gado
             $em->persist($gado);
             $em->flush();
+            $this->addFlash('success', 'Gado adicionado com sucesso!');
         }
 
         $data['titulo'] = 'Adicionar novo gado';
@@ -69,7 +81,19 @@ class GadoController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()) {
 
+            $codigo = $gado->getCodigo();
+            $existeCodigo = $em->getRepository(Gado::class)->findOneBy([
+                'codigo' => $codigo,
+                'estado' => true
+            ]);
+
+            if($existeCodigo) {
+                $this->addFlash('error', 'Erro ao editar, o código fornecido já existe!');
+                return $this->redirectToRoute('gado_editar', ['id' => $gado->getId()]);
+            }
+
             $em->flush();
+            $this->addFlash('success', 'Gado editado com sucesso!');
         }
 
         $data['titulo'] = 'Editar gado';
