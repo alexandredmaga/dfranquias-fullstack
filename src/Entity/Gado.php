@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\GadoRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: GadoRepository::class)]
 class Gado
@@ -15,18 +16,33 @@ class Gado
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Assert\PositiveOrZero(
+        message: 'O valor deve ser positivo ou 0'
+    )]
     private ?int $codigo = null;
 
     #[ORM\Column]
+    #[Assert\PositiveOrZero(
+        message: 'O valor deve ser positivo ou 0'
+    )]
     private ?float $leite = null;
 
     #[ORM\Column]
+    #[Assert\PositiveOrZero(
+        message: 'O valor deve ser positivo ou 0'
+    )]
     private ?float $racao = null;
 
     #[ORM\Column]
+    #[Assert\PositiveOrZero(
+        message: 'O valor deve ser positivo ou 0'
+    )]
     private ?float $peso = null;
 
     #[ORM\Column]
+    #[Assert\PositiveOrZero(
+        message: 'O valor deve ser positivo ou 0'
+    )]
     private ?bool $estado = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
