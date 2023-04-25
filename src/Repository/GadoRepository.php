@@ -93,6 +93,22 @@ class GadoRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 
+    public function gadosMaisPesados() {
+        return $this->createQueryBuilder('g')
+            ->orderBy('g.peso', 'DESC')
+            ->setMaxResults(3)
+            ->getQuery();
+    }
+
+    public function totalDeGadosAbatidos() {
+        return $this->createQueryBuilder('g')
+            ->where('g.estado = :estado')
+            ->select('COUNT(g.id)')
+            ->setParameter('estado', false)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
 //    public function findOneBySomeField($value): ?Gado
 //    {
 //        return $this->createQueryBuilder('g')
