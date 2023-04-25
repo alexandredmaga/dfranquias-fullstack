@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Gado;
 use App\Form\GadoType;
 use App\Repository\GadoRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,12 +32,18 @@ class GadoController extends AbstractController
     }
 
     #[Route('/gado/listar', name: 'gado_listar')]
-    public function listar(GadoRepository $gadoRepository): Response
+    public function listar(GadoRepository $gadoRepository, Request $request, PaginatorInterface $paginator): Response
     {
 
-        $gados = $gadoRepository->findAll();
-        $data['gados'] = $gados;
         $data['titulo'] = 'Gerenciar bovinos';
+
+        $query = $gadoRepository->findAll();
+        
+        $data['gados'] = $paginator->paginate(
+            $query,
+            $request->query->get('page', 1),
+            7
+        );
 
         return $this->render('gado/listar.html.twig', $data);
     }
@@ -119,10 +126,18 @@ class GadoController extends AbstractController
     }
 
     #[Route('/gado/abate', name: 'gado_abate')]
-    public function abate(GadoRepository $gadoRepository): Response
+    public function abate(GadoRepository $gadoRepository, Request $request, PaginatorInterface $paginator): Response
     {
-        $data['gados'] = $gadoRepository->findPossibiliadeDeAbate();
+
         $data['titulo'] = 'Gados prontos para abate';
+
+        $query = $gadoRepository->findPossibiliadeDeAbate();
+
+        $data['gados'] = $paginator->paginate(
+            $query,
+            $request->query->get('page', 1),
+            7
+        );
         
         return $this->render('gado/abate.html.twig', $data);
     }
@@ -142,10 +157,18 @@ class GadoController extends AbstractController
 
 
     #[Route('/gado/abatidos', name: 'gado_abatidos')]
-    public function abatidos(GadoRepository $gadoRepository): Response
+    public function abatidos(GadoRepository $gadoRepository, Request $request, PaginatorInterface $paginator): Response
     {
-        $data['gados'] = $gadoRepository->findByEstado(false);
+
         $data['titulo'] = 'Bovinos abatidos';
+
+        $query = $gadoRepository->findByEstado(false);
+
+        $data['gados'] = $paginator->paginate(
+            $query,
+            $request->query->get('page', 1),
+            7
+        );
         
         return $this->render('gado/abatidos.html.twig', $data);
     }

@@ -20,9 +20,9 @@
             <tr>
                 <td>{{gado.id}}</td>
                 <td>{{gado.codigo}}</td>
-                <td>{{gado.leite|number_format(2)}} Litros</td>
-                <td>{{gado.racao|number_format(2)}} Kg</td>
-                <td>{{gado.peso|number_format(2)}} Kg</td>
+                <td>{{gado.leite|number_format(2, ',', '.')}} Litros</td>
+                <td>{{gado.racao|number_format(2, ',', '.')}} Kg</td>
+                <td>{{gado.peso|number_format(2, ',', '.')}} Kg</td>
                 {%  if gado.estado != 1 %}
                 <td>Abatido</td>
                 {% endif %}
@@ -31,6 +31,7 @@
         {% endfor %}      
         </tbody>
     </table>
+    {{ knp_pagination_render(gados) }}
 </div>
 
 {% endblock %}

@@ -29,9 +29,9 @@
             <tr>
                 <td>{{gado.id}}</td>
                 <td>{{gado.codigo}}</td>
-                <td>{{gado.leite|number_format(2)}} Litros</td>
-                <td>{{gado.racao|number_format(2)}} Kg</td>
-                <td>{{gado.peso|number_format(2)}} Kg</td>
+                <td>{{gado.leite|number_format(2, ',', '.')}} Litros</td>
+                <td>{{gado.racao|number_format(2, ',', '.')}} Kg</td>
+                <td>{{gado.peso|number_format(2, ',', '.')}} Kg</td>
                 {% if gado.estado == 1%}
                     <td>Vivo</td>
                 {% else%}
@@ -44,30 +44,31 @@
                     <button id="btn-excluir" data-id="{{ gado.id }}" type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 Excluir
                     </button>
-
-                     <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Confirmar exclusão</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                        Tem certeza que deseja excluir o gado? A exclusão é irreversível!
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                    <a id="excluir" class="btn btn-danger">Excluir</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+    {{ knp_pagination_render(gados) }}
+
+</div>
+ <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmar exclusão</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Tem certeza que deseja excluir o gado? A exclusão é irreversível!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <a id="excluir" class="btn btn-danger">Excluir</a>
+            </div>
+        </div>
+    </div>
 </div>
               
 {% endblock %}
