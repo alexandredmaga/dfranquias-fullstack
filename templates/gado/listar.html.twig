@@ -1,7 +1,5 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}DFazendas - Gados{% endblock %}
-
+{% block title %}DFazendas - {{titulo}}{% endblock %}
 {% block body %}
 <div class="container">
     {% if app.session.flashBag.has('success') %}

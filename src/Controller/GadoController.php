@@ -112,7 +112,7 @@ class GadoController extends AbstractController
         $em->flush();
         $this->addFlash('success', 'Gado removido com sucesso!');
 
-        return $this->redirectToRoute('gado');
+        return $this->redirectToRoute('gado_listar');
     }
 
     #[Route('/gado/abate', name: 'gado_abate')]
@@ -133,7 +133,7 @@ class GadoController extends AbstractController
         $em->persist($gado);
         $em->flush(); 
 
-        return $this->redirectToRoute('gado');
+        return $this->redirectToRoute('gado_listar');
     }
 
 
