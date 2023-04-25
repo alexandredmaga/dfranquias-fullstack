@@ -131,7 +131,8 @@ class GadoController extends AbstractController
         $gado->setEstado(false);
 
         $em->persist($gado);
-        $em->flush(); 
+        $em->flush();
+        $this->addFlash('success', 'Gado mandado pro abate com sucesso!'); 
 
         return $this->redirectToRoute('gado_listar');
     }

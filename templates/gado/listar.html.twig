@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block title %}DFazendas - {{titulo}}{% endblock %}
 {% block body %}
-<div class="container">
+<div class="container mt-3 shadow-lg p-3 mb-5 bg-white rounded">
     {% if app.session.flashBag.has('success') %}
     <div class="alert alert-success">
         {% for message in app.session.flashBag.get('success') %}

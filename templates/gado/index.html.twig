@@ -1,10 +1,33 @@
 {% extends 'base.html.twig' %}
 {% block title %}DFazendas - {{titulo}} {% endblock %}
 {% block body %} 
-{{ titulo }}
-{{ leite }}
-{{ racao }}
-{{ caracteristicas }}
-
+<div class="container mt-3 p-3 bg-white mb-5 rounded"> 
+    <div class="row">
+        <div class="col-sm">
+            <div class="card border-0 shadow-lg">
+                <div class="card-body" >
+                    <h5 class="card-title text-center">Total de leite produzido na semana</h5>
+                    <p class="h1 font-weight-bold text-center">{{leite|number_format(2)}} Litros</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="card border-0 shadow-lg">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Total de ração necessária por semana</h5>
+                    <p class="h1 font-weight-bold text-center">{{racao|number_format(2)}} KG</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="card border-0 shadow-lg">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Gados que consomem mais de 500 KG e tem até 1 ano</h5>
+                    <p class="h1 font-weight-bold text-center">{{caracteristicas}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
