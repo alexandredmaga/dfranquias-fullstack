@@ -1,7 +1,14 @@
 {% extends 'base.html.twig' %}
 {% block title %}DFazendas - {{titulo}} {% endblock %}
 {% block body %} 
-
+{% if leite|length > 0 %}
+    {% if app.session.flashBag.has('error') %}
+    <div class="alert alert-danger">
+        {% for message in app.session.flashBag.get('error') %}
+            {{ message }}
+        {% endfor %}
+    </div>
+   {% endif %}
 <div class="container p-3 bg-white mb-5 rounded"> 
     <h1 class="display-3 text-center">Painel</h1>
     <div class="row">
@@ -31,6 +38,9 @@
         </div>
     </div>
     {% set pesados = pesados.getResult() %}
+    {% if pesados|length < 3 %}
+        <div class="alert alert-primary" role="alert">Cadastre no mínimo 3 gados para ver o ranking</div>
+    {% else %}
     <h2 class="text-center">Top 3 Gados mais pesados</h2>
     <div class="row row-cols-1 row-cols-md-3 g-4 m-auto">
         <div class="col">
@@ -81,5 +91,8 @@
         </div>
     </div>
 </div>
-
+{% endif %}        
+{% else %}
+    <div class="alert alert-danger" role="alert">Ainda não existem dados cadastrados no sistema</div>
+{% endif %}    
 {% endblock %}
