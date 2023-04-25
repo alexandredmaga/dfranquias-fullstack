@@ -81,7 +81,7 @@ class GadoRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 
-    public function findCaracteristicasDoGado()
+    public function findConsumoDoGado()
     {
         return $this->createQueryBuilder('g')
             ->where('g.nascimento >= :data and g.racao > 500')

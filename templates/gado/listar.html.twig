@@ -29,9 +29,9 @@
             <tr>
                 <td>{{gado.id}}</td>
                 <td>{{gado.codigo}}</td>
-                <td>{{gado.leite}} Litros</td>
-                <td>{{gado.racao}} Kg</td>
-                <td>{{gado.peso}} Kg</td>
+                <td>{{gado.leite|number_format(2)}} Litros</td>
+                <td>{{gado.racao|number_format(2)}} Kg</td>
+                <td>{{gado.peso|number_format(2)}} Kg</td>
                 {% if gado.estado == 1%}
                     <td>Vivo</td>
                 {% else%}

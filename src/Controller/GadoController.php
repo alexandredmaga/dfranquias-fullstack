@@ -22,7 +22,10 @@ class GadoController extends AbstractController
         $data['leite'] = $gadoRepository->findTotalDeLeiteProduzido();
         $data['racao'] = $gadoRepository->findRacaoNecessaria();
 
-        $data['caracteristicas'] = $gadoRepository->findCaracteristicasDoGado();
+        $data['consumo'] = $gadoRepository->findConsumoDoGado();
+        $data['pesados'] = $gadoRepository->gadosMaisPesados();
+        $data['abatidos'] = $gadoRepository->totalDeGadosAbatidos();
+
 
         return $this->render('gado/index.html.twig', $data);
     }

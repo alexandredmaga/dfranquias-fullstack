@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
 {% block title %}DFazendas - {{titulo}} {% endblock %}
 {% block body %} 
-<div class="container mt-3 p-3 bg-white mb-5 rounded"> 
+
+<div class="container p-3 bg-white mb-5 rounded"> 
+    <h1 class="display-3 text-center">Painel</h1>
     <div class="row">
         <div class="col-sm">
             <div class="card border-0 shadow-lg">
-                <div class="card-body" >
+                <div class="card-body shadow" >
                     <h5 class="card-title text-center">Total de leite produzido na semana</h5>
                     <p class="h1 font-weight-bold text-center">{{leite|number_format(2)}} Litros</p>
                 </div>
@@ -13,17 +15,67 @@
         </div>
         <div class="col-sm">
             <div class="card border-0 shadow-lg">
-                <div class="card-body">
+                <div class="card-body shadow">
                     <h5 class="card-title text-center">Total de ração necessária por semana</h5>
                     <p class="h1 font-weight-bold text-center">{{racao|number_format(2)}} KG</p>
                 </div>
             </div>
         </div>
+        <div class="col-sm mb-5">
+            <div class="card border-0 shadow-lg">
+                <div class="card-body shadow">
+                    <h5 class="card-title text-center">Gados que consomem mais de 500 KG e tem até 1 ano</h5>
+                    <p class="h1 font-weight-bold text-center">{{consumo}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% set pesados = pesados.getResult() %}
+    <h2 class="text-center">Top 3 Gados mais pesados</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4 m-auto">
+        <div class="col">
+            <div class="card shadow">
+                <img src="https://blogs.canalrural.com.br/coisasdocampo/wp-content/uploads/sites/11/2015/09/VACA-1.jpg" class="card-img-top" alt="gado">
+                    <div class="card-body">
+                        <h5 class="card-title">#3</h5>
+                        <p class="card-text">Peso: {{pesados[2].peso}} KG</p>
+                        <p class="card-text">Código: {{pesados[2].codigo}}</p>
+                        <p class="card-text">Data de Nascimento: {{pesados[2].nascimento|date("d/m/Y")}}</p>
+                        <p class="card-text">Ração diária: {{(pesados[2].racao/7)|number_format(2,',')}} KG</p>
+                    </div>
+             </div>
+        </div>
+        <div class="col">
+            <div class="card shadow">
+                <img src="https://www.reporteragro.com.br/imgsite/noticias/amp-portaldbo-agropontieri.png" class="card-img-top" alt="gado">
+                <div class="card-body">
+                    <h5 class="card-title h2">#1 🏆</h5>
+                    <p class="card-text">Peso: {{pesados[0].peso}} KG</p>
+                    <p class="card-text">Código: {{pesados[0].codigo}}</p>
+                    <p class="card-text">Data de Nascimento: {{pesados[0].nascimento|date("d/m/Y")}}</p>
+                    <p class="card-text">Ração diária: {{(pesados[0].racao/7)|number_format(2,',')}} KG</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card shadow">
+                <img src="https://www.wmborrachas.com.br/fx-files/images/big/4_plgNewsPoster.jpg" class="card-img-top" alt="imagem de partituras">
+                <div class="card-body">
+                    <h5 class="card-title h4">#2</h5>
+                    <p class="card-text">Peso: {{pesados[1].peso}} KG</p>
+                    <p class="card-text">Código: {{pesados[1].codigo}}</p>
+                    <p class="card-text">Data de Nascimento: {{pesados[1].nascimento|date("d/m/Y")}}</p>
+                    <p class="card-text">Ração diária: {{(pesados[1].racao/7)|number_format(2,',')}} KG</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
         <div class="col-sm">
             <div class="card border-0 shadow-lg">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Gados que consomem mais de 500 KG e tem até 1 ano</h5>
-                    <p class="h1 font-weight-bold text-center">{{caracteristicas}}</p>
+                <div class="card-body" >
+                    <h5 class="card-title text-center">Total de gados abatidos<i class="fa-solid fa-skull-cow"></i></h5>
+                    <p class="h1 font-weight-bold text-center">{{abatidos}}</p>
                 </div>
             </div>
         </div>
