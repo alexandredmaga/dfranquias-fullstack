@@ -110,6 +110,7 @@ class GadoController extends AbstractController
 
         $em->remove($gado);
         $em->flush();
+        $this->addFlash('success', 'Gado removido com sucesso!');
 
         return $this->redirectToRoute('gado');
     }

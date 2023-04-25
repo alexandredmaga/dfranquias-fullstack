@@ -4,6 +4,13 @@
 
 {% block body %}
 <div class="container">
+    {% if app.session.flashBag.has('success') %}
+    <div class="alert alert-success">
+        {% for message in app.session.flashBag.get('success') %}
+            {{ message }}
+        {% endfor %}
+    </div>
+   {% endif %}
     <h1>{{ titulo }}</h1>
     <a href="{{path('gado_adicionar')}}" class="btn btn-primary">+ Adicionar novo gado</a>
     <table class="table">
@@ -27,11 +34,37 @@
                 <td>{{gado.leite}} Litros</td>
                 <td>{{gado.racao}} Kg</td>
                 <td>{{gado.peso}} Kg</td>
-                <td>{{gado.estado }}</td>
+                {% if gado.estado == 1%}
+                    <td>Vivo</td>
+                {% else%}
+                    <td>Abatido</td>     
+                {% endif %}
                 <td>{{gado.nascimento|date("d/m/Y")}}</td>
                 <td>
-                    <a href="{{path('gado_editar', {id: gado.id})}}" class="btn btn-primary">Editar</a>
-                    <a href="{{path('gado_excluir', {id: gado.id})}}"  class="btn btn-primary">Excluir</a>
+                    <a href="{{ path('gado_editar', {id: gado.id}) }}" class="btn btn-outline-primary">Editar</a>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Excluir
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Confirmar exclusão</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Tem certeza que deseja excluir o gado? A exclusão é irreversível!
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                    <a href="{{ path('gado_excluir', {id: gado.id}) }}" class="btn btn-danger">Excluir</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </td>
             </tr>
         {% endfor %}      
