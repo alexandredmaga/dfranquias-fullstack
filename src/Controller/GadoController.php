@@ -24,10 +24,10 @@ class GadoController extends AbstractController
 
         $data['caracteristicas'] = $gadoRepository->findCaracteristicasDoGado();
 
-        return $this->render('home.html.twig', $data);
+        return $this->render('gado/index.html.twig', $data);
     }
 
-    #[Route('/gado', name: 'gado')]
+    #[Route('/gado/listar', name: 'gado_listar')]
     public function listar(GadoRepository $gadoRepository): Response
     {
 
@@ -35,7 +35,7 @@ class GadoController extends AbstractController
         $data['gados'] = $gados;
         $data['titulo'] = 'Gerenciar bovinos';
 
-        return $this->render('gado/index.html.twig', $data);
+        return $this->render('gado/listar.html.twig', $data);
     }
 
     #[Route('/gado/adicionar', name: 'gado_adicionar')]
