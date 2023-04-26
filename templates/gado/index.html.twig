@@ -37,7 +37,6 @@
             </div>
         </div>
     </div>
-    {% set pesados = pesados.getResult() %}
     {% if pesados|length < 3 %}
         <div class="alert alert-primary" role="alert">Cadastre no mínimo 3 gados para ver o ranking</div>
     {% else %}
@@ -51,31 +50,74 @@
                         <p class="card-text">Peso: {{pesados[2].peso}} KG</p>
                         <p class="card-text">Código: {{pesados[2].codigo}}</p>
                         <p class="card-text">Data de Nascimento: {{pesados[2].nascimento|date("d/m/Y")}}</p>
-                        <p class="card-text">Ração diária: {{(pesados[2].racao/7)|number_format(2,',')}} KG</p>
+                        <p class="card-text">Ração diária: {{(pesados[2].racao/7)|number_format(2, ',', '.')}} KG</p>
                     </div>
              </div>
         </div>
         <div class="col">
-            <div class="card shadow">
-                <img src="https://www.reporteragro.com.br/imgsite/noticias/amp-portaldbo-agropontieri.png" class="card-img-top" alt="gado">
-                <div class="card-body">
-                    <h5 class="card-title h2">#1 🏆</h5>
-                    <p class="card-text">Peso: {{pesados[0].peso}} KG</p>
-                    <p class="card-text">Código: {{pesados[0].codigo}}</p>
-                    <p class="card-text">Data de Nascimento: {{pesados[0].nascimento|date("d/m/Y")}}</p>
-                    <p class="card-text">Ração diária: {{(pesados[0].racao/7)|number_format(2,',')}} KG</p>
+            <div class="shadow">
+                <div class="card shadow-lg">
+                    <img src="https://www.reporteragro.com.br/imgsite/noticias/amp-portaldbo-agropontieri.png" class="card-img-top" alt="gado">
+                    <div class="card-body shadow-lg">
+                        <h5 class="card-title h2">#1 🏆</h5>
+                        <p class="card-text">Peso: {{pesados[0].peso}} KG</p>
+                        <p class="card-text">Código: {{pesados[0].codigo}}</p>
+                        <p class="card-text">Data de Nascimento: {{pesados[0].nascimento|date("d/m/Y")}}</p>
+                        <p class="card-text">Ração diária: {{(pesados[0].racao/7)|number_format(2, ',', '.')}} KG</p>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col">
             <div class="card shadow">
-                <img src="https://www.wmborrachas.com.br/fx-files/images/big/4_plgNewsPoster.jpg" class="card-img-top" alt="imagem de partituras">
+                <img src="https://www.wmborrachas.com.br/fx-files/images/big/4_plgNewsPoster.jpg" class="card-img-top" alt="imagem de gado">
                 <div class="card-body">
                     <h5 class="card-title h4">#2</h5>
                     <p class="card-text">Peso: {{pesados[1].peso}} KG</p>
                     <p class="card-text">Código: {{pesados[1].codigo}}</p>
                     <p class="card-text">Data de Nascimento: {{pesados[1].nascimento|date("d/m/Y")}}</p>
-                    <p class="card-text">Ração diária: {{(pesados[1].racao/7)|number_format(2,',')}} KG</p>
+                    <p class="card-text">Ração diária: {{(pesados[1].racao/7)|number_format(2, ',', '.')}} KG</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2 class="text-center mt-3">Top 3 maiores produtoras de leite</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4 m-auto">
+        <div class="col">
+            <div class="card shadow">
+                <img src="https://i1.wp.com/opresenterural.com.br/wp-content/uploads/2021/08/Vaccinar-Vaca-tratada-sem-elementos-secund%C3%A1rios_reduz.jpg?w=1400&ssl=1" alt="imagem de vaca">
+                    <div class="card-body">
+                        <h5 class="card-title">#3</h5>
+                        <p class="card-text">Leite produzido: {{maiorProdutor[2].leite}} KG</p>
+                        <p class="card-text">Código: {{maiorProdutor[2].codigo}}</p>
+                        <p class="card-text">Data de Nascimento: {{maiorProdutor[2].nascimento|date("d/m/Y")}}</p>
+                        <p class="card-text">Ração diária: {{(maiorProdutor[2].racao/7)|number_format(2, ',', '.')}} KG</p>
+                    </div>
+             </div>
+        </div>
+        <div class="col">
+            <div class="shadow">
+                <div class="card shadow-lg">
+                    <img src="http://www.revistaveterinaria.com.br/wp-content/uploads/2015/05/leiteira_02.jpg" class="card-img-top" alt="imagem de vaca">
+                    <div class="card-body shadow-lg">
+                        <h5 class="card-title h2">#1 🏆</h5>
+                        <p class="card-text">Leite produzido: {{maiorProdutor[0].leite}} KG</p>
+                        <p class="card-text">Código: {{maiorProdutor[0].codigo}}</p>
+                        <p class="card-text">Data de Nascimento: {{maiorProdutor[0].nascimento|date("d/m/Y")}}</p>
+                        <p class="card-text">Ração diária: {{(maiorProdutor[0].racao/7)|number_format(2, ',', '.')}} KG</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card shadow">
+                <img src="https://static.mundoeducacao.uol.com.br/mundoeducacao/conteudo_legenda/fc8c5cc1f52ab9ec962765d239d40548.jpg" class="card-img-top" alt="imagem de vaca">
+                <div class="card-body">
+                    <h5 class="card-title h4">#2</h5>
+                    <p class="card-text">Leite produzido: {{maiorProdutor[1].leite}} KG</p>
+                    <p class="card-text">Código: {{maiorProdutor[1].codigo}}</p>
+                    <p class="card-text">Data de Nascimento: {{maiorProdutor[1].nascimento|date("d/m/Y")}}</p>
+                    <p class="card-text">Ração diária: {{(maiorProdutor[1].racao/7)|number_format(2, ',', '.')}} KG</p>
                 </div>
             </div>
         </div>
@@ -84,7 +126,7 @@
         <div class="col-sm">
             <div class="card border-0 shadow-lg">
                 <div class="card-body" >
-                    <h5 class="card-title text-center">Total de gados abatidos<i class="fa-solid fa-skull-cow"></i></h5>
+                    <h5 class="card-title text-center">Total de gados abatidos <i class="fa-solid fa-skull-crossbones"></i></h5>
                     <p class="h1 font-weight-bold text-center">{{abatidos}}</p>
                 </div>
             </div>
