@@ -120,6 +120,7 @@ class GadoController extends AbstractController
 
             $em->flush();
             $this->addFlash('success', 'Gado editado com sucesso!');
+            return $this->redirectToRoute('gado_listar');
         }
 
         $data['titulo'] = 'Editar gado';
