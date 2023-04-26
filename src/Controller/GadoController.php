@@ -60,7 +60,8 @@ class GadoController extends AbstractController
         $form = $this->createForm(GadoType::class, $gado);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if($form->isSubmitted() && $form->isValid()) 
+        {
             
             $codigo = $gado->getCodigo();
             $existeCodigo = $em->getRepository(Gado::class)->findOneBy([
@@ -68,7 +69,8 @@ class GadoController extends AbstractController
                 'estado' => true
             ]);
 
-            if($existeCodigo) {
+            if($existeCodigo) 
+            {
                 $this->addFlash('error', 'Erro ao adicionar, o código fornecido já existe!');
                 return $this->redirectToRoute('gado_adicionar');
             }
@@ -91,20 +93,29 @@ class GadoController extends AbstractController
     {
 
         $gado = $gadoRepository->find($id);
+        
+        $codigo = $gado->getCodigo();
+        
         $form = $this->createForm(GadoType::class, $gado);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if($form->isSubmitted() && $form->isValid()) 
+        {    
+            
+            $codigoEnviado = $gado->getCodigo();
 
-            $codigo = $gado->getCodigo();
-            $existeCodigo = $em->getRepository(Gado::class)->findOneBy([
-                'codigo' => $codigo,
-                'estado' => true
-            ]);
+            if($codigo !== $codigoEnviado) 
+            {
+                $existeCodigo = $em->getRepository(Gado::class)->findOneBy([
+                    'codigo' => $codigoEnviado,
+                    'estado' => true
+                 ]);
 
-            if($existeCodigo) {
-                $this->addFlash('error', 'Erro ao editar, o código fornecido já existe!');
-                return $this->redirectToRoute('gado_editar', ['id' => $gado->getId()]);
+                if($existeCodigo) 
+                {
+                    $this->addFlash('error', 'Erro ao editar, o código fornecido já existe!');
+                    return $this->redirectToRoute('gado_editar', ['id' => $gado->getId()]);
+                }
             }
 
             $em->flush();

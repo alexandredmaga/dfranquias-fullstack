@@ -24,15 +24,18 @@ class GadoType extends AbstractType
 			])
 			->add('leite', NumberType::class, [
 				'label' => 'Leite por semana: ', 
-				'attr' => ['placeholder' => 'Litros de leite produzido na semana']
+				'attr' => ['placeholder' => 'Litros de leite produzido na semana'],
+				'invalid_message' => 'Insira um número válido'
 			])
 			->add('racao', NumberType::class, [
 				'label' => 'Ração ingerida por semana: ',
-				'attr' => ['placeholder' => 'Ração em quilos ingerida por semana']
+				'attr' => ['placeholder' => 'Ração em quilos ingerida por semana'],
+				'invalid_message' => 'Insira um número válido'
 			])
 			->add('peso', NumberType::class, [
 				'label' => 'Peso do Gado em quilos: ', 
-				'attr' => ['placeholder' => 'Peso do gado em quilos']
+				'attr' => ['placeholder' => 'Peso do gado em quilos'],
+				'invalid_message' => 'Insira um número válido'
 			])
 			->add('nascimento', DateType::class, [
 				'label' => 'Data de nascimento do gado',

@@ -43,7 +43,7 @@ class GadoRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('g')
             ->where('g.estado = true')
-            ->andWhere('g.leite < 40 or g.nascimento < :data or (g.peso/15) > 18 or (g.leite < 70 and g.racao > (50/7))')
+            ->andWhere('g.leite < 40 or g.nascimento <= :data or (g.peso/15) > 18 or (g.leite < 70 and g.racao > (50/7))')
             ->setParameter('data', date('Y-m-d', strtotime('-5 year')))
             ->orderBy('g.id')
             ->getQuery()
