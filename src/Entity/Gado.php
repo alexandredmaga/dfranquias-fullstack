@@ -48,6 +48,11 @@ class Gado
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $nascimento = null;
 
+    public function __construct() 
+    {
+        $this->estado = true;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -125,8 +130,5 @@ class Gado
         return $this;
     }
 
-    public function __construct() 
-    {
-        $this->estado = true;
-    }
+   
 }

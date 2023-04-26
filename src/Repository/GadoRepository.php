@@ -39,7 +39,7 @@ class GadoRepository extends ServiceEntityRepository
         }
     }
 
-    public function findPossibiliadeDeAbate() 
+    public function findPossibiliadeAbate() 
     {
         return $this->createQueryBuilder('g')
             ->where('g.estado = true')
@@ -61,7 +61,7 @@ class GadoRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findTotalDeLeiteProduzido() 
+    public function findTotalLeiteProduzido() 
     {
         return $this->createQueryBuilder('g')
             ->where('g.estado = :estado')
@@ -81,7 +81,7 @@ class GadoRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 
-    public function findConsumoDoGado()
+    public function findConsumoGado()
     {
         return $this->createQueryBuilder('g')
             ->where('g.nascimento >= :data and g.racao > 500')
@@ -93,20 +93,32 @@ class GadoRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 
-    public function gadosMaisPesados() {
+    public function findGadosMaisPesados() 
+    {
         return $this->createQueryBuilder('g')
             ->orderBy('g.peso', 'DESC')
             ->setMaxResults(3)
-            ->getQuery();
+            ->getQuery()
+            ->getResult();
     }
 
-    public function totalDeGadosAbatidos() {
+    public function findTotalGadosAbatidos() 
+    {
         return $this->createQueryBuilder('g')
             ->where('g.estado = :estado')
             ->select('COUNT(g.id)')
             ->setParameter('estado', false)
             ->getQuery()
             ->getSingleScalarResult();
+    }
+
+    public function findMaiorProdutorLeite() 
+    {
+        return $this->createQueryBuilder('g')
+            ->orderBy('g.leite', 'DESC')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult();
     }
 
 //    public function findOneBySomeField($value): ?Gado

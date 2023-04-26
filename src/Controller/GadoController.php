@@ -19,13 +19,16 @@ class GadoController extends AbstractController
     public function index(GadoRepository $gadoRepository): Response
     {
 
-        $data['titulo'] = 'home';
-        $data['leite'] = $gadoRepository->findTotalDeLeiteProduzido();
+        $data['titulo'] = 'Home';
+        
+        $data['leite'] = $gadoRepository->findTotalLeiteProduzido();
         $data['racao'] = $gadoRepository->findRacaoNecessaria();
-
-        $data['consumo'] = $gadoRepository->findConsumoDoGado();
-        $data['pesados'] = $gadoRepository->gadosMaisPesados();
-        $data['abatidos'] = $gadoRepository->totalDeGadosAbatidos();
+        $data['consumo'] = $gadoRepository->findConsumoGado();
+        
+        $data['pesados'] = $gadoRepository->findGadosMaisPesados();
+        $data['abatidos'] = $gadoRepository->findTotalGadosAbatidos();
+        $data['maiorProdutor'] = $gadoRepository->findMaiorProdutorLeite();
+        $data['maisVelho'] = $gadoRepository->findMaiorProdutorLeite();
 
 
         return $this->render('gado/index.html.twig', $data);
@@ -73,6 +76,8 @@ class GadoController extends AbstractController
             $em->persist($gado);
             $em->flush();
             $this->addFlash('success', 'Gado adicionado com sucesso!');
+            return $this->redirectToRoute('gado_listar');
+
         }
 
         $data['titulo'] = 'Adicionar novo gado';
@@ -131,7 +136,7 @@ class GadoController extends AbstractController
 
         $data['titulo'] = 'Gados prontos para abate';
 
-        $query = $gadoRepository->findPossibiliadeDeAbate();
+        $query = $gadoRepository->findPossibiliaDeAbate();
 
         $data['gados'] = $paginator->paginate(
             $query,
@@ -152,7 +157,7 @@ class GadoController extends AbstractController
         $em->flush();
         $this->addFlash('success', 'Gado mandado pro abate com sucesso!'); 
 
-        return $this->redirectToRoute('gado_listar');
+        return $this->redirectToRoute('gado_abate');
     }
 
 
