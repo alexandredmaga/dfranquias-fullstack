@@ -48,6 +48,9 @@ class Gado
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $nascimento = null;
 
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $dataabatimento = null;
+
     public function __construct() 
     {
         $this->estado = true;
@@ -126,6 +129,18 @@ class Gado
     public function setNascimento(\DateTimeInterface $nascimento): self
     {
         $this->nascimento = $nascimento;
+
+        return $this;
+    }
+
+    public function getDataabatimento(): ?\DateTimeInterface
+    {
+        return $this->dataabatimento;
+    }
+
+    public function setDataabatimento(?\DateTimeInterface $dataabatimento): self
+    {
+        $this->dataabatimento = $dataabatimento;
 
         return $this;
     }
