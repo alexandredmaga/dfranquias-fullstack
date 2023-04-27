@@ -49,6 +49,9 @@
         {% endfor %}
         </tbody>
     </table>
+    {% if gados is empty %}
+       <div class="alert alert-primary" role="alert">Ainda não existem gados cadastrados no sistema! </div> 
+    {% endif %}    
     {{ knp_pagination_render(gados) }}
 
 </div>
