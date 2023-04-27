@@ -29,6 +29,10 @@ class GadoController extends AbstractController
         $data['abatidos'] = $gadoRepository->findTotalGadosAbatidos();
         $data['maiorProdutor'] = $gadoRepository->findMaiorProdutorLeite();
         $data['maisVelho'] = $gadoRepository->findMaiorProdutorLeite();
+        $data['gadosVivos'] = $gadoRepository->findTotalGadosVivos();
+
+        $data['gadosCadastrados'] = $gadoRepository->findTotalGadosCadastrados();
+        $data['totalAbatidosMes'] = $gadoRepository->findTotalGadosAbatidosMes();
 
 
         return $this->render('gado/index.html.twig', $data);
@@ -164,6 +168,7 @@ class GadoController extends AbstractController
     {
         $gado = $gadoRepository->find($id);  
         $gado->setEstado(false);
+        $gado->setDataabatimento(new \DateTime('now'));
 
         $em->persist($gado);
         $em->flush();

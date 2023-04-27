@@ -53,6 +53,7 @@ class GadoRepository extends ServiceEntityRepository
 
     public function findByEstado($value): array
     {
+       
        return $this->createQueryBuilder('g')
             ->andWhere('g.estado = :val')
             ->setParameter('val', $value)
@@ -96,7 +97,9 @@ class GadoRepository extends ServiceEntityRepository
     public function findGadosMaisPesados() 
     {
         return $this->createQueryBuilder('g')
+            ->where('g.estado = :estado')
             ->orderBy('g.peso', 'DESC')
+            ->setParameter('estado', true)
             ->setMaxResults(3)
             ->getQuery()
             ->getResult();
@@ -115,11 +118,73 @@ class GadoRepository extends ServiceEntityRepository
     public function findMaiorProdutorLeite() 
     {
         return $this->createQueryBuilder('g')
+            ->where('g.estado = :estado')
             ->orderBy('g.leite', 'DESC')
+            ->setParameter('estado', true)
             ->setMaxResults(3)
             ->getQuery()
             ->getResult();
     }
+
+    public function findTotalGadosVivos() 
+    {
+         return $this->createQueryBuilder('g')
+            ->where('g.estado = :estado')
+            ->select('COUNT(g.id)')
+            ->setParameter('estado', true)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function findTotalGadosCadastrados() 
+    {
+         return $this->createQueryBuilder('g')
+            ->select('COUNT(g.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function findTotalGadosAbatidosMes()
+    {
+
+        $em = $this->getEntityManager();
+        $emConfig = $em->getConfiguration();
+        $emConfig->addCustomDatetimeFunction('MONTH', 'DoctrineExtensions\Query\Mysql\Month');
+
+        $qb = $this->createQueryBuilder('g')
+            ->select('COUNT(DISTINCT g.id) as total, MONTH(g.dataabatimento) as mes')
+            ->where('g.estado = :estado')
+            ->setParameter('estado', false)
+            ->groupBy('mes');
+        
+        $dataResult = $qb->getQuery()->getResult();
+
+        $abatidosPorMes = [];
+
+        $nomesMeses = ['Janeiro', 'Fervereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+
+        foreach(range(1, 12) as $key) {
+            
+            $abatidosPorMes[$key] = [
+                'mes' => $nomesMeses[$key - 1],
+                'total' => 0
+            ];
+        }
+
+        foreach($dataResult as $data) {
+            $mes = (int) $data['mes'];
+
+            $abatidosPorMes[$mes] = [
+                'mes' => $nomesMeses[$mes - 1],
+                'total' => (int) $data['total']
+            ];
+        }
+
+        return $abatidosPorMes;
+
+    }
+
+
 
 //    public function findOneBySomeField($value): ?Gado
 //    {
